@@ -1,0 +1,9 @@
+.form__item {
+  max-width: calc(100% - 36px*2);
+  border: 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
+  padding: 0;
+}

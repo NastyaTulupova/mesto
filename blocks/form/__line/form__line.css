@@ -1,0 +1,11 @@
+.form__line {
+  width: 100%;
+  opacity: 0.2;
+  border: 1px solid #000;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.form__line:last-of-type {
+  margin-bottom: 48px;
+}

@@ -1,0 +1,17 @@
+.gallery__heart {
+  width: 22px;
+  height: 19px;
+  margin-left: auto;
+  align-self: center;
+  background-color: #FFF;
+  cursor: pointer;
+  transition: opacity .3s ease-in;
+}
+
+.gallery__heart:hover {
+  opacity: 0.5;
+}
+
+.gallery__heart:active {
+  background: #000;
+}

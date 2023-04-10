@@ -1,0 +1,8 @@
+.popup {
+  background-color: #000;
+ /* opacity: 0.5;*/
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

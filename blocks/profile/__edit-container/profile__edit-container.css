@@ -1,0 +1,13 @@
+.profile__edit-container {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+gap: 18px;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__edit-container {
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 14px;
+}}
