@@ -22,11 +22,11 @@
       <div class="profile__info">
         <div class="profile__edit-container">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"></button>
+          <button type="button" class="profile__edit-button"></button>
         </div>
         <p class="profile__subtitle">Исследователь океана</p>
       </div>
-      <button class="profile__add-button"></button>
+      <button type="button" class="profile__add-button"></button>
     </section>
     <section aria-label="Фотогалерея" class="elements">
       <ul class="gallery">
@@ -34,68 +34,74 @@
           <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Изображение Карачаевска" class="gallery__image">
           <div class="gallery__title-heart-area">
             <h2 class="gallery__title">Карачаево-Черкесск</h2>
-            <img src="./images/Heart_Vector.svg" alt="Изображение сердца в карточке" class="gallery__heart">
+            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
+                alt="Изображение иконки сердца"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/Kazan.jpg" alt="Изображение Казани" class="gallery__image">
           <div class="gallery__title-heart-area">
             <h2 class="gallery__title">Казань</h2>
-            <img src="./images/Heart_Vector.svg" alt="Изображение сердца в карточке" class="gallery__heart">
+            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
+                alt="Изображение иконки сердца"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/Olhon.jpg" alt="Изображение острова Ольхон" class="gallery__image">
           <div class="gallery__title-heart-area">
             <h2 class="gallery__title">Остров Ольхон</h2>
-            <img src="./images/Heart_Vector.svg" alt="Изображение сердца в карточке" class="gallery__heart">
+            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
+                alt="Изображение иконки сердца"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/Moscow.jpg" alt="Изображение Москвы" class="gallery__image">
           <div class="gallery__title-heart-area">
             <h2 class="gallery__title">Москва</h2>
-            <img src="./images/Heart_Vector.svg" alt="Изображение сердца в карточке" class="gallery__heart">
+            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
+                alt="Изображение иконки сердца"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/Spb.jpg" alt="Изображение Санкт-Петербурга" class="gallery__image">
           <div class="gallery__title-heart-area">
             <h2 class="gallery__title">Санкт-Петербург</h2>
-            <img src="./images/Heart_Vector.svg" alt="Изображение сердца в карточке" class="gallery__heart">
+            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
+                alt="Изображение иконки сердца"></button>
           </div>
         </li>
         <li class="gallery__item">
           <img src="./images/Nikola-Lenivets.jpg" alt="Изображение Никола-Ленивца" class="gallery__image">
           <div class="gallery__title-heart-area">
             <h2 class="gallery__title">Никола-Ленивец</h2>
-            <img src="./images/Heart_Vector.svg" alt="Изображение сердца в карточке" class="gallery__heart">
+            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
+                alt="Изображение иконки сердца"></button>
           </div>
         </li>
       </ul>
-      <div class="popup">
-        <div class="popup__container">
-          <form class="form">
-            <h3 class="form__title">Редактировать профиль</h3>
-            <fieldset class="form__input-container">
-              <label for="name" class="form__label"></label>
-              <input type="text" class="form__item" id="name" name="name"
-                placeholder="Жак-Ив Кусто">
-              <div class="form__line"></div>
-              <label for="description" class="form__label"></label>
-              <input type="text" class="form__item" id="description" name="description"
-                placeholder="Исследователь океана">
-              <div class="form__line"></div>
-              <button type="submit" class="form__button">Сохранить</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
+  <section class="popup">
+    <div class="popup__container">
+      <form class="form">
+        <h3 class="form__title">Редактировать профиль</h3>
+        <fieldset class="form__input-container">
+          <label for="name" class="form__label"></label>
+          <input type="text" class="form__item" id="name" name="name" placeholder="Жак-Ив Кусто">
+          <div class="form__line"></div>
+          <label for="job" class="form__label"></label>
+          <input type="text" class="form__item" id="job" name="job" placeholder="Исследователь океана">
+          <div class="form__line"></div>
+          <button type="submit" class="form__button">Сохранить</button>
+        </fieldset>
+      </form>
+      <button type="button" class="popup__close-icon"></button>
+    </div>
+  </section>
+  <script src="script.js"></script>
 </body>
 
 </html>

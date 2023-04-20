@@ -5,9 +5,15 @@
   flex-direction: column;
 }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 750px) {
+  .header {
+    width: calc(100% - 50px*2);
+    padding-top: 28px;
+  }
+}
+
+@media screen and (max-width: 320px) {
   .header {
     width: 100%;
-    padding-top: 28px;
   }
 }
