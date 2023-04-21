@@ -14,10 +14,3 @@
     transform: translateX(14px);
   }
 }
-
-/*@media screen and (max-width:320px) {
-  .profile__edit-container {
-    align-self: center;
-    gap: 0px;
-  }
-} */
