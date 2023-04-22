@@ -8,7 +8,6 @@
 
 @media screen and (max-width: 900px) {
   .profile__edit-container {
-    width: 100%;
     gap: 10px;
     margin-bottom: 9px;
     transform: translateX(14px);
