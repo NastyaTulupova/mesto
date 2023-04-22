@@ -14,7 +14,6 @@
 <body class="page">
   <header class="header">
     <img src="./images/Logo.svg" alt="Лого сервиса Mesto" class="header__logo">
-    <div class="header__line"></div>
   </header>
   <main class="content">
     <section class="profile">
@@ -84,24 +83,22 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
-  <section class="popup">
+  <div class="popup">
     <div class="popup__container">
-      <form class="form">
+      <form class="form" name="form">
         <h3 class="form__title">Редактировать профиль</h3>
         <fieldset class="form__input-container">
           <label for="name" class="form__label"></label>
-          <input type="text" class="form__item" id="name" name="name" placeholder="Жак-Ив Кусто">
-          <div class="form__line"></div>
+          <input type="text" class="form__item" id="name" name="name" placeholder="Ваше имя">
           <label for="job" class="form__label"></label>
-          <input type="text" class="form__item" id="job" name="job" placeholder="Исследователь океана">
-          <div class="form__line"></div>
+          <input type="text" class="form__item" id="job" name="job" placeholder="Ваш род деятельности">
           <button type="submit" class="form__button">Сохранить</button>
         </fieldset>
       </form>
       <button type="button" class="popup__close-icon"></button>
     </div>
-  </section>
-  <script src="script.js"></script>
+  </div>
+  <script src="./scripts/script.js"></script>
 </body>
 
 </html>

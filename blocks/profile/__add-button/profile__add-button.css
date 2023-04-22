@@ -6,7 +6,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: black;
+  background-color: rgba(0,0,0,0);
   border: none;
   cursor: pointer;
   transition: opacity .3s ease-in;
@@ -25,7 +25,7 @@
 
 @media screen and (max-width: 320px) {
   .profile__add-button {
-    background-image: url(../../../images/Add_Button_mobile.png);
+    background-image: url(../../../images/Add_Button_mobile.svg);
     width: 100%;
   }
 }
