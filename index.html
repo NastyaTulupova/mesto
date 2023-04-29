@@ -29,63 +29,17 @@
     </section>
     <section aria-label="Фотогалерея" class="elements">
       <ul class="gallery">
-        <li class="gallery__item">
-          <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Изображение Карачаевска" class="gallery__image">
-          <div class="gallery__title-heart-area">
-            <h2 class="gallery__title">Карачаево-Черкесск</h2>
-            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
-                alt="Изображение иконки сердца"></button>
-          </div>
-        </li>
-        <li class="gallery__item">
-          <img src="./images/Kazan.jpg" alt="Изображение Казани" class="gallery__image">
-          <div class="gallery__title-heart-area">
-            <h2 class="gallery__title">Казань</h2>
-            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
-                alt="Изображение иконки сердца"></button>
-          </div>
-        </li>
-        <li class="gallery__item">
-          <img src="./images/Olhon.jpg" alt="Изображение острова Ольхон" class="gallery__image">
-          <div class="gallery__title-heart-area">
-            <h2 class="gallery__title">Остров Ольхон</h2>
-            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
-                alt="Изображение иконки сердца"></button>
-          </div>
-        </li>
-        <li class="gallery__item">
-          <img src="./images/Moscow.jpg" alt="Изображение Москвы" class="gallery__image">
-          <div class="gallery__title-heart-area">
-            <h2 class="gallery__title">Москва</h2>
-            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
-                alt="Изображение иконки сердца"></button>
-          </div>
-        </li>
-        <li class="gallery__item">
-          <img src="./images/Spb.jpg" alt="Изображение Санкт-Петербурга" class="gallery__image">
-          <div class="gallery__title-heart-area">
-            <h2 class="gallery__title">Санкт-Петербург</h2>
-            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
-                alt="Изображение иконки сердца"></button>
-          </div>
-        </li>
-        <li class="gallery__item">
-          <img src="./images/Nikola-Lenivets.jpg" alt="Изображение Никола-Ленивца" class="gallery__image">
-          <div class="gallery__title-heart-area">
-            <h2 class="gallery__title">Никола-Ленивец</h2>
-            <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
-                alt="Изображение иконки сердца"></button>
-          </div>
-        </li>
+
       </ul>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
   </footer>
-  <div class="popup">
+
+  <div class="popup popup_type_edit">
     <div class="popup__container">
-      <form class="form" name="form">
+      <form class="form" name="edit-form">
         <h3 class="form__title">Редактировать профиль</h3>
         <fieldset class="form__input-container">
           <label for="name" class="form__label"></label>
@@ -95,9 +49,46 @@
           <button type="submit" class="form__button">Сохранить</button>
         </fieldset>
       </form>
-      <button type="button" class="popup__close-icon"></button>
+      <button type="button" class="popup__close-icon popup__close-icon_type_edit"></button>
     </div>
   </div>
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <form class="form form_type_add" name="add-form">
+        <h3 class="form__title">Новое место</h3>
+        <fieldset class="form__input-container">
+          <label for="place-name" class="form__label"></label>
+          <input type="text" class="form__item" id="place-name" name="place-name" placeholder="Название">
+          <label for="link" class="form__label"></label>
+          <input type="text" class="form__item" id="link" name="link" placeholder="Ссылка на картинку">
+          <button type="submit" class="form__button">Сохранить</button>
+        </fieldset>
+      </form>
+      <button type="button" class="popup__close-icon popup__close-icon_type_add"></button>
+    </div>
+  </div>
+  <div class="popup popup_type_image">
+    <div class="popup__image-container">
+      <figure>
+        <img src="./images/Nikola-Lenivets.jpg" alt="Изображение Никола-Ленивца" class="popup__image">
+        <figcaption class="popup__figcaption">Подпись</figcaption>
+      </figure>
+      <button type="button" class="popup__close-icon popup__close-icon_type_image"></button>
+    </div>
+  </div>
+
+  <template id="item">
+    <li class="gallery__item">
+      <img alt="Изображение места" class="gallery__image">
+      <div class="gallery__title-heart-area">
+        <h2 class="gallery__title"></h2>
+        <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"
+          alt="Изображение иконки сердца"></button>
+      </div>
+      <button type="button" class="gallery__trash"></button>
+    </li>
+  </template>
+
   <script src="./scripts/script.js"></script>
 </body>
 
