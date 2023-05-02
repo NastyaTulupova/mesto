@@ -39,7 +39,7 @@
 
   <div class="popup popup_type_edit">
     <div class="popup__container">
-      <form class="form" name="edit-form">
+      <form class="form form_type_edit" name="edit-form">
         <h3 class="form__title">Редактировать профиль</h3>
         <fieldset class="form__input-container">
           <label for="name" class="form__label"></label>
@@ -70,7 +70,7 @@
   <div class="popup popup_type_image">
     <div class="popup__image-container">
       <figure>
-        <img src="./images/Nikola-Lenivets.jpg" alt="Изображение Никола-Ленивца" class="popup__image">
+        <img class="popup__image">
         <figcaption class="popup__figcaption"></figcaption>
       </figure>
       <button type="button" class="popup__close-icon popup__close-icon_type_image"></button>
@@ -79,7 +79,7 @@
 
   <template id="item">
     <li class="gallery__item">
-      <img alt="Изображение места" class="gallery__image">
+      <img class="gallery__image">
       <div class="gallery__title-heart-area">
         <h2 class="gallery__title"></h2>
         <button type="button" class="gallery__heart"><img src="./images/Heart_Vector.svg"

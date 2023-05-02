@@ -27,8 +27,6 @@ const initialCards = [
 
 const gallery = document.querySelector('.gallery');
 const itemTemplate = document.querySelector('#item').content;
-
-const popUp = document.querySelector('.popup');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupImage = document.querySelector('.popup_type_image');
@@ -44,9 +42,9 @@ const buttonCloseAdd = document.querySelector('.popup__close-icon_type_add');
 const buttonCloseImage = document.querySelector('.popup__close-icon_type_image');
 
 // Находим форму в DOM
-const form = document.querySelector('.form');
+const editForm = document.querySelector('.form_type_edit');
 const addForm = document.querySelector('.form_type_add');
-const formInputContainer = form.querySelector('.form__input-container');
+const formInputContainer = document.querySelector('.form__input-container');
 
 // Находим поля формы в DOM
 let inputName = formInputContainer.querySelector('#name');
@@ -59,47 +57,53 @@ let inputLink = addForm.querySelector('#link');
 let profileTitle = profile.querySelector('.profile__title');
 let profileSubtitle = profile.querySelector('.profile__subtitle');
 
-let galleryTitle = document.querySelector('.gallery__title');
-let galleryImage = document.querySelector('.gallery__image');
 
-//создание карточки из темплейта + слушатели:
-const createCard = (element) => {
+//подготовка данных для карточки из темплейта
+const prepareCardData = (name, link) => {
   const card = itemTemplate.querySelector('.gallery__item').cloneNode(true);
-  card.querySelector('.gallery__title').textContent = element.name;
-  card.querySelector('.gallery__image').src = element.link;
+  card.querySelector('.gallery__title').textContent = name;
+  card.querySelector('.gallery__image').src = link;
+  card.querySelector('.gallery__image').alt = name;
+  return card;
+}
 
-//слушатель на удаление
+//создание карточки + слушатели:
+const createCard = (name, link) => {
+  const card = prepareCardData(name, link);
+
+  //слушатель на удаление
   card.querySelector('.gallery__trash').addEventListener('click', () => {
     card.remove();
   });
 
-//слушатель на лайк
+  //слушатель на лайк
   const buttonGalleryLike = card.querySelector('.gallery__heart');
   buttonGalleryLike.addEventListener('click', () => {
     buttonGalleryLike.classList.toggle('gallery__heart_active');
   });
 
- //слушатель на открытие картинки
- card.querySelector('.gallery__image').addEventListener('click', () => {
-  const popupForShow = popupImage;
-  popupForShow.querySelector('.popup__image').src = card.querySelector('.gallery__image').src;
-  popupForShow.querySelector('.popup__figcaption').textContent = card.querySelector('.gallery__title').textContent;
-  showForm(popupForShow);
- });
+  //слушатель на открытие картинки
+  card.querySelector('.gallery__image').addEventListener('click', () => {
+    const popupForShow = popupImage;
+    popupForShow.querySelector('.popup__image').src = card.querySelector('.gallery__image').src;
+    popupForShow.querySelector('.popup__figcaption').textContent = card.querySelector('.gallery__title').textContent;
+    popupForShow.querySelector('.popup__image').alt = card.querySelector('.gallery__title').textContent;
+    showForm(popupForShow);
+  });
   return card;
 }
 
+//отрисовка карточки в галерее
+const renderCard = (name, link) => {
+  gallery.prepend(createCard(name, link));
+}
+
 const cardList = initialCards.map(element => {
-  const cardElement = createCard(element);
+  const cardElement = createCard(element.name, element.link);
   return cardElement;
 });
 
-const renderCard = (element) => {
-  gallery.prepend(createCard(element));
-}
-
 gallery.prepend(...cardList);
-
 
 //Работа с формами:
 const showForm = (popup) => {
@@ -110,7 +114,10 @@ const showForm = (popup) => {
     inputJob.value = profileSubtitle.textContent;
   }
 
-  else { popup.classList.add('popup_opened'); }
+  else {
+    popup.classList.add('popup_opened');
+  }
+  console.log('!');
 }
 
 
@@ -118,7 +125,7 @@ const closeForm = (popup) => {
   popup.classList.remove('popup_opened');
 }
 
-const handleFormSubmit = (evt) => {
+const handleEditFormSubmit = (evt) => {
   evt.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
@@ -127,10 +134,9 @@ const handleFormSubmit = (evt) => {
 
 const handleAddFormSubmit = (evt) => {
   evt.preventDefault();
-  const newCard = itemTemplate.querySelector('.gallery__item').cloneNode(true);
-  newCard.querySelector('.gallery__title').textContent = inputPlaceName.value;
-  newCard.querySelector('.gallery__image').src = inputLink.value;
-  renderCard(newCard);
+
+  renderCard(inputPlaceName.value, inputLink.value);
+  console.log(gallery);
   closeForm(popupAdd);
 }
 
@@ -141,5 +147,5 @@ buttonCloseAdd.addEventListener('click', () => closeForm(popupAdd));
 buttonCloseEdit.addEventListener('click', () => closeForm(popupEdit));
 buttonCloseImage.addEventListener('click', () => closeForm(popupImage));
 
-form.addEventListener('submit', handleFormSubmit);
+editForm.addEventListener('submit', handleEditFormSubmit);
 addForm.addEventListener('submit', handleAddFormSubmit);
