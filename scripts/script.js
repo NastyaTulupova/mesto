@@ -117,7 +117,6 @@ const showForm = (popup) => {
   else {
     popup.classList.add('popup_opened');
   }
-  console.log('!');
 }
 
 

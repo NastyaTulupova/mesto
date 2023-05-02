@@ -8,20 +8,8 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
-  visibility: hidden;
-  opacity: 0;
-  animation: closed 0.2s ease;
   display: flex;
-}
-
-@keyframes closed {
-  from {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  to {
-    visibility: hidden;
-    opacity: 0;
-  }
+  transition: opacity 0.5s visibility 0s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
 }
