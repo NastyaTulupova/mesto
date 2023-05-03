@@ -8,6 +8,9 @@
   <meta name="keywords" content="Mesto, Место, путешествия, Россия, Russia, travel">
   <meta name="author" content="Анастасия Тулупова">
   <link rel="stylesheet" href="./pages/index.css">
+  <script defer src="./scripts/constants.js"></script>
+  <script defer src="./scripts/script.js"></script>
+
   <title>Mesto</title>
 </head>
 
@@ -43,9 +46,9 @@
         <h3 class="form__title">Редактировать профиль</h3>
         <fieldset class="form__input-container">
           <label for="name" class="form__label"></label>
-          <input type="text" class="form__item" id="name" name="name" placeholder="Ваше имя">
+          <input required type="text" class="form__item" id="name" name="name" placeholder="Ваше имя">
           <label for="job" class="form__label"></label>
-          <input type="text" class="form__item" id="job" name="job" placeholder="Ваш род деятельности">
+          <input required type="text" class="form__item" id="job" name="job" placeholder="Ваш род деятельности">
           <button type="submit" class="form__button">Сохранить</button>
         </fieldset>
       </form>
@@ -58,9 +61,9 @@
         <h3 class="form__title">Новое место</h3>
         <fieldset class="form__input-container">
           <label for="place-name" class="form__label"></label>
-          <input type="text" class="form__item" id="place-name" name="place-name" placeholder="Название">
+          <input required type="text" class="form__item" id="place-name" name="place-name" placeholder="Название">
           <label for="link" class="form__label"></label>
-          <input type="text" class="form__item" id="link" name="link" placeholder="Ссылка на картинку">
+          <input required type="url" class="form__item" id="link" name="link" placeholder="Ссылка на картинку">
           <button type="submit" class="form__button">Сохранить</button>
         </fieldset>
       </form>
@@ -70,6 +73,7 @@
   <div class="popup popup_type_image">
     <div class="popup__image-container">
       <figure>
+        <img class="popup__image">
         <figcaption class="popup__figcaption"></figcaption>
       </figure>
       <button type="button" class="popup__close-icon popup__close-icon_type_image"></button>
@@ -88,7 +92,6 @@
     </li>
   </template>
 
-  <script src="./scripts/script.js"></script>
 </body>
 
 </html>

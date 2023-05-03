@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const gallery = document.querySelector('.gallery');
 const itemTemplate = document.querySelector('#item').content;
 const popupAdd = document.querySelector('.popup_type_add');
@@ -47,15 +20,15 @@ const addForm = document.querySelector('.form_type_add');
 const formInputContainer = document.querySelector('.form__input-container');
 
 // Находим поля формы в DOM
-let inputName = formInputContainer.querySelector('#name');
-let inputJob = formInputContainer.querySelector('#job');
+const inputName = formInputContainer.querySelector('#name');
+const inputJob = formInputContainer.querySelector('#job');
 
 // Поля формы добавления:
-let inputPlaceName = addForm.querySelector('#place-name');
-let inputLink = addForm.querySelector('#link');
+const inputPlaceName = addForm.querySelector('#place-name');
+const inputLink = addForm.querySelector('#link');
 
-let profileTitle = profile.querySelector('.profile__title');
-let profileSubtitle = profile.querySelector('.profile__subtitle');
+const profileTitle = profile.querySelector('.profile__title');
+const profileSubtitle = profile.querySelector('.profile__subtitle');
 
 
 //подготовка данных для карточки из темплейта
@@ -84,11 +57,10 @@ const createCard = (name, link) => {
 
   //слушатель на открытие картинки
   card.querySelector('.gallery__image').addEventListener('click', () => {
-    const popupForShow = popupImage;
-    popupForShow.querySelector('.popup__image').src = card.querySelector('.gallery__image').src;
-    popupForShow.querySelector('.popup__figcaption').textContent = card.querySelector('.gallery__title').textContent;
-    popupForShow.querySelector('.popup__image').alt = card.querySelector('.gallery__title').textContent;
-    showForm(popupForShow);
+    popupImage.querySelector('.popup__image').src = card.querySelector('.gallery__image').src;
+    popupImage.querySelector('.popup__figcaption').textContent = card.querySelector('.gallery__title').textContent;
+    popupImage.querySelector('.popup__image').alt = card.querySelector('.gallery__title').textContent;
+    showPopup(popupImage);
   });
   return card;
 }
@@ -98,29 +70,17 @@ const renderCard = (name, link) => {
   gallery.prepend(createCard(name, link));
 }
 
-const cardList = initialCards.map(element => {
-  const cardElement = createCard(element.name, element.link);
-  return cardElement;
-});
+const cardList = initialCards.map(({ name, link }) => createCard(name, link));
 
 gallery.prepend(...cardList);
 
 //Работа с формами:
-const showForm = (popup) => {
-
-  if (popup === popupEdit) {
+const showPopup = (popup) => {
     popup.classList.add('popup_opened');
-    inputName.value = profileTitle.textContent;
-    inputJob.value = profileSubtitle.textContent;
-  }
-
-  else {
-    popup.classList.add('popup_opened');
-  }
 }
 
 
-const closeForm = (popup) => {
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 }
 
@@ -128,23 +88,26 @@ const handleEditFormSubmit = (evt) => {
   evt.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputJob.value;
-  closeForm(popupEdit);
+  closePopup(popupEdit);
 }
 
 const handleAddFormSubmit = (evt) => {
   evt.preventDefault();
 
   renderCard(inputPlaceName.value, inputLink.value);
-  console.log(gallery);
-  closeForm(popupAdd);
+  closePopup(popupAdd);
+  evt.target.reset();
 }
 
-buttonEdit.addEventListener('click', () => showForm(popupEdit));
-buttonAdd.addEventListener('click', () => showForm(popupAdd));
+buttonEdit.addEventListener('click', () => {
+  showPopup(popupEdit);
+  inputName.value = profileTitle.textContent;
+  inputJob.value = profileSubtitle.textContent;});
+buttonAdd.addEventListener('click', () => showPopup(popupAdd));
 
-buttonCloseAdd.addEventListener('click', () => closeForm(popupAdd));
-buttonCloseEdit.addEventListener('click', () => closeForm(popupEdit));
-buttonCloseImage.addEventListener('click', () => closeForm(popupImage));
+buttonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
+buttonCloseEdit.addEventListener('click', () => closePopup(popupEdit));
+buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
 
 editForm.addEventListener('submit', handleEditFormSubmit);
 addForm.addEventListener('submit', handleAddFormSubmit);
