@@ -76,7 +76,7 @@ gallery.prepend(...cardList);
 
 //Работа с формами:
 const showPopup = (popup) => {
-    popup.classList.add('popup_opened');
+  popup.classList.add('popup_opened');
 }
 
 
@@ -102,7 +102,8 @@ const handleAddFormSubmit = (evt) => {
 buttonEdit.addEventListener('click', () => {
   showPopup(popupEdit);
   inputName.value = profileTitle.textContent;
-  inputJob.value = profileSubtitle.textContent;});
+  inputJob.value = profileSubtitle.textContent;
+});
 buttonAdd.addEventListener('click', () => showPopup(popupAdd));
 
 buttonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
