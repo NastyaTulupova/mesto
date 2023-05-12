@@ -1,8 +1,11 @@
 const gallery = document.querySelector('.gallery');
 const itemTemplate = document.querySelector('#item').content;
+
+const popups = document.querySelectorAll('.popup');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupImage = document.querySelector('.popup_type_image');
+const popupOpened = document.querySelector('.popup_opened');
 
 const profile = document.querySelector('.profile');
 
@@ -15,17 +18,20 @@ const buttonCloseAdd = document.querySelector('.popup__close-icon_type_add');
 const buttonCloseImage = document.querySelector('.popup__close-icon_type_image');
 
 // Находим форму в DOM
+const form = document.querySelector('.form');
+const formInput = form.querySelector('.form__item');
 const editForm = document.querySelector('.form_type_edit');
 const addForm = document.querySelector('.form_type_add');
 const formInputContainer = document.querySelector('.form__input-container');
+const formError = form.querySelector(`.${formInput.id}-error`);
 
 // Находим поля формы в DOM
-const inputName = formInputContainer.querySelector('#name');
-const inputJob = formInputContainer.querySelector('#job');
+const inputName = formInputContainer.querySelector('#name-input');
+const inputJob = formInputContainer.querySelector('#job-input');
 
 // Поля формы добавления:
-const inputPlaceName = addForm.querySelector('#place-name');
-const inputLink = addForm.querySelector('#link');
+const inputPlaceName = addForm.querySelector('#place-name-input');
+const inputLink = addForm.querySelector('#link-input');
 
 const profileTitle = profile.querySelector('.profile__title');
 const profileSubtitle = profile.querySelector('.profile__subtitle');
@@ -74,14 +80,20 @@ const cardList = initialCards.map(({ name, link }) => createCard(name, link));
 
 gallery.prepend(...cardList);
 
-//Работа с формами:
+//Работа с попапами:
 const showPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
 }
-
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+}
+
+const closePopupByEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(popupOpened);
+  };
 }
 
 const handleEditFormSubmit = (evt) => {
@@ -104,6 +116,7 @@ buttonEdit.addEventListener('click', () => {
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
 });
+
 buttonAdd.addEventListener('click', () => showPopup(popupAdd));
 
 buttonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
@@ -112,3 +125,12 @@ buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
 
 editForm.addEventListener('submit', handleEditFormSubmit);
 addForm.addEventListener('submit', handleAddFormSubmit);
+
+//отдельная функция
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    };
+  });
+});
