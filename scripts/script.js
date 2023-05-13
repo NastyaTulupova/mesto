@@ -126,7 +126,7 @@ buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
 editForm.addEventListener('submit', handleEditFormSubmit);
 addForm.addEventListener('submit', handleAddFormSubmit);
 
-//отдельная функция
+//Закрытие попапа по клику на оверлей:
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {

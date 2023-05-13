@@ -1,55 +1,57 @@
-function disabledButton(buttonElement) {
-buttonElement.disabled = 'disabled';
-buttonElement.classList.add('form__button_invalid');
+function disabledButton(buttonElement, config) {
+  buttonElement.disabled = 'disabled';
+  buttonElement.classList.add(config.inactiveButtonClass);
 }
 
-function enabledButton(buttonElement) {
+function enabledButton(buttonElement, config) {
   buttonElement.disabled = false;
-  buttonElement.classList.remove('form__button_invalid');
-  }
+  buttonElement.classList.remove(config.inactiveButtonClass);
+}
 
 // Состояние кнопки Сохранить:
-function toggleButtonState(buttonElement, isActive) {
+function toggleButtonState(buttonElement, isActive, config) {
   if (!isActive) {
-    disabledButton(buttonElement);}
-    else {
-      enabledButton(buttonElement);
-    }
+    disabledButton(buttonElement, config);
   }
+  else {
+    enabledButton(buttonElement, config);
+  }
+}
 
 //Показ ошибки:
-function showError(inputElement, errorElement) {
-  inputElement.classList.add('form__item_state_invalide');
+function showError(inputElement, errorElement, config) {
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
 }
 
-function hideError(inputElement, errorElement) {
-  inputElement.classList.remove('form__item_state_invalide');
+function hideError(inputElement, errorElement, config) {
+  inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
 }
 
 //При наступлении ввода в инпут проверяем инпут на валидность:
-function checkInputValidity(inputElement, formElement) {
+function checkInputValidity(inputElement, formElement, config) {
   console.log(inputElement.validationMessage);
+  console.log('validityState', inputElement.validity);
+
   const isInputValid = inputElement.validity.valid;
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
   if (!errorElement) return;
 
   if (!isInputValid) {
-    showError(inputElement, errorElement);
-  }
-  else {
-    hideError(inputElement, errorElement);
+    showError(inputElement, errorElement, config)
+  } else {
+    hideError(inputElement, errorElement, config)
   }
 
   console.log(errorElement);
 }
 
-function setEventListener(formElement) {
+function setEventListener(formElement, config) {
 
   // В каждой форме ищем инпуты:
-  const inputsList = formElement.querySelectorAll('.form__item');
-  const submitButtonElement = formElement.querySelector('.form__button');
+  const inputsList = formElement.querySelectorAll(config.inputSelector);
+  const submitButtonElement = formElement.querySelector(config.submitButtonSelector);
 
   toggleButtonState(submitButtonElement, formElement.checkValidity());
 
@@ -62,18 +64,27 @@ function setEventListener(formElement) {
   // Навешиваем слушатель на каждый импут в конкретной форме:
   [...inputsList].forEach((inputItem) => {
     inputItem.addEventListener('input', () => {
-      toggleButtonState(submitButtonElement, formElement.checkValidity());
-      checkInputValidity(inputItem, formElement);
+      toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
+      checkInputValidity(inputItem, formElement, config);
     })
   })
 }
 
 //Находим все формы, перебираем их и вешаем слушатель по сабмиту на каждую форму:
-function enableValidation() {
-  const forms = document.querySelectorAll('.form');
+function enableValidation(config) {
+  const forms = document.querySelectorAll(config.formSelector);
   [...forms].forEach((formItem) => {
-    setEventListener(formItem);
+    setEventListener(formItem, config);
   })
 }
 
-enableValidation();
+const configFormSelector = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_invalid',
+  inputErrorClass: 'form__item_state_invalid',
+  errorClass: 'error'
+}
+
+enableValidation(configFormSelector);
