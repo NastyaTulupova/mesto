@@ -1,3 +1,12 @@
+const configFormSelector = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_invalid',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'error'
+}
+
 function disabledButton(buttonElement, config) {
   buttonElement.disabled = 'disabled';
   buttonElement.classList.add(config.inactiveButtonClass);
@@ -27,6 +36,7 @@ function showError(inputElement, errorElement, config) {
 function hideError(inputElement, errorElement, config) {
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
+  errorElement.textContent = '';
 }
 
 //При наступлении ввода в инпут проверяем инпут на валидность:
@@ -35,7 +45,7 @@ function checkInputValidity(inputElement, formElement, config) {
   console.log('validityState', inputElement.validity);
 
   const isInputValid = inputElement.validity.valid;
-  const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   if (!errorElement) return;
 
   if (!isInputValid) {
@@ -53,7 +63,7 @@ function setEventListener(formElement, config) {
   const inputsList = formElement.querySelectorAll(config.inputSelector);
   const submitButtonElement = formElement.querySelector(config.submitButtonSelector);
 
-  toggleButtonState(submitButtonElement, formElement.checkValidity());
+  toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
 
 
   formElement.addEventListener('submit', (evt) => {
@@ -73,18 +83,10 @@ function setEventListener(formElement, config) {
 //Находим все формы, перебираем их и вешаем слушатель по сабмиту на каждую форму:
 function enableValidation(config) {
   const forms = document.querySelectorAll(config.formSelector);
+
   [...forms].forEach((formItem) => {
     setEventListener(formItem, config);
   })
-}
-
-const configFormSelector = {
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__button',
-  inactiveButtonClass: 'form__button_invalid',
-  inputErrorClass: 'form__item_state_invalid',
-  errorClass: 'error'
 }
 
 enableValidation(configFormSelector);
