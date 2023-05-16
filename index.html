@@ -45,15 +45,19 @@
     <div class="popup__container">
       <form class="form form_type_edit" name="edit-form" novalidate>
         <h3 class="form__title">Редактировать профиль</h3>
-        <fieldset class="form__input-container">
-          <label for="name" class="form__label"></label>
-          <input required type="text" class="form__item" id="name-input" name="name" placeholder="Ваше имя" minlength="2" maxlength="40">
-          <span class="error" id="name-input-error"></span>
-          <label for="job" class="form__label"></label>
-          <input required type="text" class="form__item" id="job-input" name="job" placeholder="Ваш род деятельности" minlength="2" maxlength="200">
-          <span class="error" id="job-input-error"></span>
+        <div class="form__inputs-container">
+          <div class="form__input-container">
+            <input required type="text" class="form__item" id="name-input" name="name" placeholder="Ваше имя"
+              minlength="2" maxlength="40">
+            <span class="error" id="name-input-error"></span>
+          </div>
+          <div class="form__input-container">
+            <input required type="text" class="form__item" id="job-input" name="job" placeholder="Ваш род деятельности"
+              minlength="2" maxlength="200">
+            <span class="error" id="job-input-error"></span>
+          </div>
           <button type="submit" class="form__button">Сохранить</button>
-        </fieldset>
+        </div>
       </form>
       <button type="button" class="popup__close-icon popup__close-icon_type_edit"></button>
     </div>
@@ -62,15 +66,18 @@
     <div class="popup__container">
       <form class="form form_type_add" name="add-form" novalidate>
         <h3 class="form__title">Новое место</h3>
-        <fieldset class="form__input-container">
-          <label for="place-name" class="form__label"></label>
-          <input required type="text" class="form__item" id="place-name-input" name="place-name" placeholder="Название" minlength="2" maxlength="30">
-          <span class="error"  id="place-name-input-error"></span>
-          <label for="link" class="form__label"></label>
-          <input required type="url" class="form__item" id="link-input" name="link" placeholder="Ссылка на картинку">
-          <span class="error" id="link-input-error"></span>
+        <div class="form__inputs-container">
+          <div class="form__input-container">
+            <input required type="text" class="form__item" id="place-name-input" name="place-name"
+              placeholder="Название" minlength="2" maxlength="30">
+            <span class="error" id="place-name-input-error"></span>
+          </div>
+          <div class="form__input-container">
+            <input required type="url" class="form__item" id="link-input" name="link" placeholder="Ссылка на картинку">
+            <span class="error" id="link-input-error"></span>
+          </div>
           <button type="submit" class="form__button">Сохранить</button>
-        </fieldset>
+        </div>
       </form>
       <button type="button" class="popup__close-icon popup__close-icon_type_add"></button>
     </div>

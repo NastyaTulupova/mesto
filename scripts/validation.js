@@ -3,6 +3,7 @@ const configFormSelector = {
   inputSelector: '.form__item',
   submitButtonSelector: '.form__button',
   inactiveButtonClass: 'form__button_invalid',
+  activeButtonClass: 'form__button_valid',
   inputErrorClass: 'form__item_type_error',
   errorClass: 'error'
 }
@@ -14,6 +15,7 @@ function disabledButton(buttonElement, config) {
 
 function enabledButton(buttonElement, config) {
   buttonElement.disabled = false;
+  buttonElement.classList.add(config.activeButtonClass);
   buttonElement.classList.remove(config.inactiveButtonClass);
 }
 
@@ -41,11 +43,9 @@ function hideError(inputElement, errorElement, config) {
 
 //При наступлении ввода в инпут проверяем инпут на валидность:
 function checkInputValidity(inputElement, formElement, config) {
-  console.log(inputElement.validationMessage);
-  console.log('validityState', inputElement.validity);
-
   const isInputValid = inputElement.validity.valid;
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+
   if (!errorElement) return;
 
   if (!isInputValid) {
@@ -53,8 +53,6 @@ function checkInputValidity(inputElement, formElement, config) {
   } else {
     hideError(inputElement, errorElement, config)
   }
-
-  console.log(errorElement);
 }
 
 function setEventListener(formElement, config) {
@@ -64,12 +62,6 @@ function setEventListener(formElement, config) {
   const submitButtonElement = formElement.querySelector(config.submitButtonSelector);
 
   toggleButtonState(submitButtonElement, formElement.checkValidity(), config);
-
-
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    console.log('Форма отправлена!');
-  });
 
   // Навешиваем слушатель на каждый импут в конкретной форме:
   [...inputsList].forEach((inputItem) => {

@@ -5,7 +5,6 @@ const popups = document.querySelectorAll('.popup');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupImage = document.querySelector('.popup_type_image');
-const popupOpened = document.querySelector('.popup_opened');
 
 const profile = document.querySelector('.profile');
 
@@ -17,17 +16,14 @@ const buttonCloseEdit = document.querySelector('.popup__close-icon_type_edit');
 const buttonCloseAdd = document.querySelector('.popup__close-icon_type_add');
 const buttonCloseImage = document.querySelector('.popup__close-icon_type_image');
 
-// Находим форму в DOM
-const form = document.querySelector('.form');
-const formInput = form.querySelector('.form__item');
+// Находим формы в DOM
 const editForm = document.querySelector('.form_type_edit');
 const addForm = document.querySelector('.form_type_add');
 const formInputContainer = document.querySelector('.form__input-container');
-const formError = form.querySelector(`.${formInput.id}-error`);
 
-// Находим поля формы в DOM
-const inputName = formInputContainer.querySelector('#name-input');
-const inputJob = formInputContainer.querySelector('#job-input');
+// Находим поля формы редактирования в DOM
+const inputName = editForm.querySelector('#name-input');
+const inputJob = editForm.querySelector('#job-input');
 
 // Поля формы добавления:
 const inputPlaceName = addForm.querySelector('#place-name-input');
@@ -88,10 +84,12 @@ const showPopup = (popup) => {
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
 }
 
 const closePopupByEsc = (evt) => {
   if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   };
 }
@@ -109,6 +107,8 @@ const handleAddFormSubmit = (evt) => {
   renderCard(inputPlaceName.value, inputLink.value);
   closePopup(popupAdd);
   evt.target.reset();
+  evt.submitter.classList.add('form__button_invalid')
+  evt.submitter.disabled = true;
 }
 
 buttonEdit.addEventListener('click', () => {
@@ -119,9 +119,10 @@ buttonEdit.addEventListener('click', () => {
 
 buttonAdd.addEventListener('click', () => showPopup(popupAdd));
 
-buttonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
-buttonCloseEdit.addEventListener('click', () => closePopup(popupEdit));
-buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
+document.querySelectorAll('.popup__close-icon').forEach(button => {
+  const buttonsPopup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(buttonsPopup));
+});
 
 editForm.addEventListener('submit', handleEditFormSubmit);
 addForm.addEventListener('submit', handleAddFormSubmit);

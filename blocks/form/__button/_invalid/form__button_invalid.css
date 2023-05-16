@@ -5,7 +5,6 @@
   background-repeat: no-repeat;
   background-color: rgba(0, 0, 0, 0);
   border: none;
-  cursor: pointer;
   transition: opacity .3s ease-in;
   margin-left: auto;
   color: rgba(0, 0, 0, 0.2);
