@@ -1,4 +1,4 @@
-import {Card} from './Card.js';
+import { Card } from './Card.js';
 import { initialCards, configFormSelector } from './Constants.js';
 import { FormValidator } from './FormValidator.js';
 
@@ -34,12 +34,12 @@ const profileSubtitle = profile.querySelector('.profile__subtitle');
 //Открытие карточки в режиме просмотра изображения
 const handleImageOpen = (card) => {
   popupImage.querySelector('.popup__image').src = card.link;
-    popupImage.querySelector('.popup__figcaption').textContent = card.name;
-    popupImage.querySelector('.popup__image').alt = card.name;
-    showPopup(popupImage);
+  popupImage.querySelector('.popup__figcaption').textContent = card.name;
+  popupImage.querySelector('.popup__image').alt = card.name;
+  showPopup(popupImage);
 }
 
-  //функция создания карточки через класс:
+//функция создания карточки через класс:
 const createCard = (data) => {
   const card = new Card(data, '#item', handleImageOpen);
   return card.generateCard();
@@ -95,12 +95,13 @@ document.querySelectorAll('.popup__close-icon').forEach(button => {
 const handleAddFormSubmit = (evt) => {
   evt.preventDefault();
 
-  renderCard({name: inputPlaceName.value,
-    link: inputLink.value});
+  renderCard({
+    name: inputPlaceName.value,
+    link: inputLink.value
+  });
   closePopup(popupAdd);
   evt.target.reset();
-  evt.submitter.classList.add('form__button_invalid')
-  evt.submitter.disabled = true;
+  validationFormAdd.disabledButton();
 }
 
 addForm.addEventListener('submit', handleAddFormSubmit);

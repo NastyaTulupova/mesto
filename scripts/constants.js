@@ -35,4 +35,4 @@ const configFormSelector = {
   errorClass: 'error'
 }
 
-export {initialCards, configFormSelector};
+export { initialCards, configFormSelector };

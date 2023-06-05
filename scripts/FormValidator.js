@@ -11,7 +11,7 @@ class FormValidator {
     this._inputsList = this._form.querySelectorAll(this._inputSelector);
   }
 
-  _disabledButton() {
+  disabledButton() {
     this._buttonElement.disabled = 'disabled';
     this._buttonElement.classList.add(this._inactiveButtonClass);
   }
@@ -27,7 +27,7 @@ class FormValidator {
     this._isActive = this._form.checkValidity();
 
     if (!this._isActive) {
-      this._disabledButton();
+      this.disabledButton();
     }
     else {
       this._enabledButton();
@@ -62,9 +62,6 @@ class FormValidator {
 
   _setEventListener() {
 
-    // В каждой форме ищем инпуты:
-    //const submitButtonElement = this._formElement.querySelector(this._submitButtonSelector);
-
     this._toggleButtonState();
 
     // Навешиваем слушатель на каждый импут в конкретной форме:
@@ -76,14 +73,8 @@ class FormValidator {
     })
   }
 
-  //Находим все формы, перебираем их и вешаем слушатель по сабмиту на каждую форму:
   enableValidation() {
     this._setEventListener();
-    /* const forms = document.querySelectorAll(this._formSelector);
-
-     [...forms].forEach((formItem) => {
-       _setEventListener(formItem);
-     })*/
   }
 
 }
