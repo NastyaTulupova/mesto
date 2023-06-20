@@ -1,0 +1,15 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "**Описание проекта** Проект сервиса Mesto в рамках Спринтов # 4-7 обучения в Яндекс. Практикум. Цель выполнения проекта: Научиться работать с базовым JavaScript и DOM.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.87.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

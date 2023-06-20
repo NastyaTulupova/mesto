@@ -12,7 +12,7 @@ class FormValidator {
   }
 
   disabledButton() {
-    this._buttonElement.disabled = 'disabled';
+    this._buttonElement.disabled = "disabled";
     this._buttonElement.classList.add(this._inactiveButtonClass);
   }
 
@@ -28,8 +28,7 @@ class FormValidator {
 
     if (!this._isActive) {
       this.disabledButton();
-    }
-    else {
+    } else {
       this._enabledButton();
     }
   }
@@ -43,7 +42,7 @@ class FormValidator {
   _hideError(inputElement, errorElement) {
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
-    errorElement.textContent = '';
+    errorElement.textContent = "";
   }
 
   //При наступлении ввода в инпут проверяем инпут на валидность:
@@ -54,29 +53,27 @@ class FormValidator {
     if (!errorElement) return;
 
     if (!isInputValid) {
-      this._showError(inputElement, errorElement)
+      this._showError(inputElement, errorElement);
     } else {
-      this._hideError(inputElement, errorElement)
+      this._hideError(inputElement, errorElement);
     }
   }
 
   _setEventListener() {
-
     this._toggleButtonState();
 
     // Навешиваем слушатель на каждый импут в конкретной форме:
     [...this._inputsList].forEach((inputItem) => {
-      inputItem.addEventListener('input', () => {
+      inputItem.addEventListener("input", () => {
         this._toggleButtonState();
         this._checkInputValidity(inputItem);
-      })
-    })
+      });
+    });
   }
 
   enableValidation() {
     this._setEventListener();
   }
-
 }
 
 export { FormValidator };
