@@ -12,32 +12,34 @@ class PopupWithForm extends Popup {
 
   //сбор данных всех полей формы.
   _getInputValues() {
-    this._cardData = {};
-    this._inputsList.forEach((input) => {
-      this._cardData[input.name] = input.value;
+    this._inputValues = {};
+    this._inputList.forEach((input) => {
+      this._inputValues[input.name] = input.value;
     });
-    return this._cardData;
+    return this._inputValues;
   }
 
   //установка в инпут переданных данных
-setInputValues = (data) => {
-  this._inputsList.forEach((input, i) => {
-    input.value = Object.values(data)[i];
-  });
+  setInputValues = (data) => {
+    this._inputsList.forEach((input, i) => {
+      input.value = Object.values(data)[i];
+    });
+  };
+
+
+  close() {
+    this._popupFormElement.reset();
+    super.close();
   }
 
   setEventListeners() {
     super.setEventListeners();
     this._popupFormElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
+      this._submitCallback(this._getInputValues());
       this.close();
-      this._callbackSubmitForm(this._getInputValues());
     });
-  }
-
-  close() {
-    super.close();
   }
 }
 
-export {PopupWithForm};
+export { PopupWithForm };
