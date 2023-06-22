@@ -64,12 +64,9 @@ buttonEdit.addEventListener("click", () => {
 
 //создание Popup добавления карточки
 const popupAddCards = new PopupWithForm(".popup_type_add", {
-  submitCallback: ({ title, link }) => {
+  submitCallback: (item) => {
     cardContainer.addItem(
-      createCard({
-        name: title,
-        link: link,
-      })
+      createCard(item)
     );
     validationFormAdd.disabledButton();
     popupAddCards.close();
