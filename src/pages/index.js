@@ -1,6 +1,9 @@
 import "./index.css";
 import { Card } from "../scripts/components/Card.js";
-import { initialCards, configFormSelector } from "../scripts/utils/constants.js"
+import {
+  initialCards,
+  configFormSelector,
+} from "../scripts/utils/constants.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
@@ -68,7 +71,6 @@ const popupAddCards = new PopupWithForm(".popup_type_add", {
         link: link,
       })
     );
-    addForm.reset();
     validationFormAdd.disabledButton();
     popupAddCards.close();
   },
