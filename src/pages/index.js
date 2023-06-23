@@ -32,7 +32,7 @@ const createCard = (data) => {
 //создание карточек из массива (создание секции)
 const cardContainer = new Section(
   {
-    items: initialCards,
+    items: initialCards.reverse(),
     renderer: (item) => {
       cardContainer.addItem(createCard(item));
     },
@@ -65,9 +65,7 @@ buttonEdit.addEventListener("click", () => {
 //создание Popup добавления карточки
 const popupAddCards = new PopupWithForm(".popup_type_add", {
   submitCallback: (item) => {
-        cardContainer.addItem(
-      createCard(item)
-    );
+    cardContainer.addItem(createCard(item));
     validationFormAdd.disabledButton();
     popupAddCards.close();
   },
@@ -87,27 +85,3 @@ validationFormEdit.enableValidation();
 
 const validationFormAdd = new FormValidator(configFormSelector, addForm);
 validationFormAdd.enableValidation();
-
-/*const handleAddFormSubmit = (evt) => {
-  evt.preventDefault();
-
-  renderCard({
-    name: inputPlaceName.value,
-    link: inputLink.value,
-  });
-
-  closePopup(popupAdd);
-  evt.target.reset();
-  validationFormAdd.disabledButton();
-};*/
-
-//addForm.addEventListener("submit", handleAddFormSubmit);
-
-//editForm.addEventListener("submit", handleEditFormSubmit);
-
-/*const handleEditFormSubmit = (evt) => {
-  evt.preventDefault();
-  profileTitle.textContent = inputName.value;
-  profileSubtitle.textContent = inputJob.value;
-  closePopup(popupEdit);
-};*/

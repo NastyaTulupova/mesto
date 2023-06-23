@@ -13,9 +13,10 @@ class PopupWithForm extends Popup {
   //сбор данных всех полей формы.
   _getInputValues() {
     this._inputValues = {};
-    this._inputList.forEach((input) => {
+    this._inputsList.forEach((input) => {
       this._inputValues[input.name] = input.value;
     });
+    console.log(this._inputValues);
     return this._inputValues;
   }
 
@@ -25,7 +26,6 @@ class PopupWithForm extends Popup {
       input.value = data[input.name];
     });
   };
-
 
   close() {
     this._popupFormElement.reset();
