@@ -21,8 +21,8 @@ class PopupWithForm extends Popup {
 
   //установка в инпут переданных данных
   setInputValues = (data) => {
-    this._inputsList.forEach((input, i) => {
-      input.value = Object.values(data)[i];
+    this._inputsList.forEach((input) => {
+      input.value = data[input.name];
     });
   };
 
