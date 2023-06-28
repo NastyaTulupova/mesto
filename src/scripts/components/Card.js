@@ -2,10 +2,13 @@ class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+   // this.idCard = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector(".gallery__image");
+  //  this._idUserCard = data.owner._id;
+   // this._userId = userId;
   }
 
   //подготовка данных для карточки из темплейта

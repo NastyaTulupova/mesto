@@ -1,14 +1,14 @@
 import "./index.css";
 import { Card } from "../scripts/components/Card.js";
 import {
-  initialCards,
-  configFormSelector,
+  configFormSelector
 } from "../scripts/utils/constants.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
+import {Api} from "../scripts/components/Api.js";
 
 // кнопки/ нажатия
 const buttonEdit = document.querySelector(".profile__edit-button");
@@ -21,6 +21,9 @@ const addForm = document.querySelector(".form_type_add");
 //Открытие карточки в режиме просмотра изображения
 const popupWithImage = new PopupWithImage(".popup_type_image");
 
+const api = new Api();
+
+
 //функция создания карточки через класс:
 const createCard = (data) => {
   const card = new Card(data, "#item", () => {
@@ -32,7 +35,7 @@ const createCard = (data) => {
 //создание карточек из массива (создание секции)
 const cardContainer = new Section(
   {
-    items: initialCards.reverse(),
+    //items: initialCards.reverse(),
     renderer: (item) => {
       cardContainer.addItem(createCard(item));
     },
@@ -40,7 +43,7 @@ const cardContainer = new Section(
   ".gallery"
 );
 
-cardContainer.renderItems();
+//cardContainer.renderItems();
 
 //Получение инфы из профиля
 const userInfo = new UserInfo({
@@ -51,8 +54,12 @@ const userInfo = new UserInfo({
 //Создание Popup редактирования
 const popupEditProfile = new PopupWithForm(".popup_type_edit", {
   submitCallback: (data) => {
-    userInfo.setUserInfo(data);
-    popupEditProfile.close();
+    api.setUserInfoServer(data)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+      popupEditProfile.close();
+    })
+    .catch((error) => console.log(`Произошла ошибка ${error}`));
   },
 });
 
@@ -85,3 +92,13 @@ validationFormEdit.enableValidation();
 
 const validationFormAdd = new FormValidator(configFormSelector, addForm);
 validationFormAdd.enableValidation();
+
+// Ответы от сервера
+Promise.all([api.getUserInfoServer(), api.getInitialCardsServer()])
+.then(([resUser, resCard]) => {
+   console.log("get", resUser);
+  userInfo.setUserInfo(resUser);
+  userInfo.setUserAvatar(resUser);
+  cardContainer.renderItems(resCard);
+})
+.catch((error => console.log(`Произошла ошибка ${error}`)));
