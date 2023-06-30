@@ -4,9 +4,9 @@ class Section {
     this._renderer = renderer;
   }
 
-  renderItems(items) {
+  renderItems(items, user) {
     items.forEach((item) => {
-      this._renderer(item);
+      this._renderer(item, user);
     });
   }
 

@@ -87,14 +87,24 @@
       <button type="button" class="popup__close-icon popup__close-icon_type_image"></button>
     </div>
   </div>
+  <div class="popup popup_type_agreement">
+    <div class="popup__container">
+      <h3 class="popup__title">Вы уверены?</h3>
+      <button type="submit" class="popup__button-agreement">Да</button>
+    <button type="button" class="popup__close-icon"></button>
+  </div>
+  </div>
 
   <template id="item">
     <li class="gallery__item">
       <img class="gallery__image">
       <div class="gallery__title-heart-area">
         <h2 class="gallery__title"></h2>
-        <button type="button" class="gallery__heart"><img src="<%=require('./images/Heart_Vector.svg')%>"
+        <div class="gallery__like-conteiner">
+          <button type="button" class="gallery__heart"><img src="<%=require('./images/Heart_Vector.svg')%>"
             alt="Изображение иконки сердца"></button>
+          <p class="gallery__like-counter">0</p>
+        </div>
       </div>
       <button type="button" class="gallery__trash"></button>
     </li>

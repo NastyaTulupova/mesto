@@ -3,7 +3,6 @@ class Api {
 
   _checkResponse(res) {
     if (res.ok) {
-      // console.log(res.json());
       return res.json();
     } else {
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -16,10 +15,7 @@ class Api {
         authorization: "e59ea592-c0c2-42e6-8473-e454683560cc",
       },
     })
-      .then((res) => this._checkResponse(res))
-      .then((result) => {
-        console.log(result);
-      });
+      .then((res) => this._checkResponse(res));
   }
 
   getInitialCardsServer() {
@@ -28,10 +24,7 @@ class Api {
         authorization: "e59ea592-c0c2-42e6-8473-e454683560cc",
       },
     })
-      .then((res) => this._checkResponse(res))
-      .then((result) => {
-        console.log(result);
-      });
+      .then((res) => this._checkResponse(res));
   }
 
   setUserInfoServer(data) {
@@ -46,10 +39,7 @@ class Api {
         about: data.about,
       }),
     })
-      .then((res) => this._checkResponse(res))
-      .then((result) => {
-        console.log(result);
-      });
+      .then((res) => this._checkResponse(res));
   }
 
   addNewCardServer(data) {
@@ -64,10 +54,29 @@ class Api {
         link: data.link,
       }),
     })
-      .then((res) => this._checkResponse(res))
-      .then((result) => {
-        console.log(result);
-      });
+      .then((res) => this._checkResponse(res));
+  }
+
+  putLikeCardServer() {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-70/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: "e59ea592-c0c2-42e6-8473-e454683560cc",
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => this._checkResponse(res));
+  }
+
+  deleteLikeCardServer() {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-70/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: "e59ea592-c0c2-42e6-8473-e454683560cc",
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => this._checkResponse(res));
   }
 }
 
