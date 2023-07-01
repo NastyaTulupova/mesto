@@ -7,6 +7,7 @@ import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
 import { Api } from "../scripts/components/Api.js";
+import { PopupWithAgreement } from "../scripts/components/PopupWithAgreement.js";
 
 // кнопки/ нажатия
 const buttonEdit = document.querySelector(".profile__edit-button");
@@ -98,6 +99,18 @@ const popupAddCards = new PopupWithForm(".popup_type_add", {
 buttonAdd.addEventListener("click", () => {
   popupAddCards.open();
 });
+
+// //создание Popup удаления карточки
+const popupDeleteCard = new PopupWithAgreement(".popup_type_agreement", {
+  submitCallback: (cardId, card) => {
+    api.deleteCardServer(cardId)
+    .then(() => {
+      card.deleteCard();
+      popupDeleteCard.close();
+    })
+    .catch((error) => console.log(`Произошла ошибка ${error}`));
+    }
+  });
 
 popupAddCards.setEventListeners();
 popupEditProfile.setEventListeners();

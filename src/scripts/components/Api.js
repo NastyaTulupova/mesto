@@ -57,7 +57,7 @@ class Api {
       .then((res) => this._checkResponse(res));
   }
 
-  putLikeCardServer() {
+  putLikeCardServer(cardId) {
     return fetch(`https://mesto.nomoreparties.co/v1/cohort-70/cards/${cardId}/likes`, {
       method: "PUT",
       headers: {
@@ -68,8 +68,19 @@ class Api {
     .then((res) => this._checkResponse(res));
   }
 
-  deleteLikeCardServer() {
+  deleteLikeCardServer(cardId) {
     return fetch(`https://mesto.nomoreparties.co/v1/cohort-70/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: "e59ea592-c0c2-42e6-8473-e454683560cc",
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => this._checkResponse(res));
+  }
+
+  deleteCardServer(cardId) {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-70/cards/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: "e59ea592-c0c2-42e6-8473-e454683560cc",

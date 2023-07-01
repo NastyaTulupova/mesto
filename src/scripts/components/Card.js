@@ -1,6 +1,6 @@
 class Card {
   constructor(data, userId, templateSelector,
-    //handleCardClick, handleCardLike, handleDeleteLike
+    handleCardClick, handleDeleteLike, handleCardDelete //, handleCardLike,
     ) {
     this._name = data.name;
     this._link = data.link;
@@ -8,12 +8,12 @@ class Card {
     this._likesCounter = data.likes.length;
     this.cardData= data;
     this._templateSelector = templateSelector;
-   /* this._handleCardClick = handleCardClick;
-    this._handleCardLike = handleCardLike;
-    this._handleDeleteLike = handleDeleteLike;*/
+    this._handleCardClick = handleCardClick;
+    this._handleCardDelete = handleCardDelete;
+   // this._handleCardLike = handleCardLike;
+    this._handleDeleteLike = handleDeleteLike;
     this._idCardUser = data.owner._id;
     this._userId = userId;
-    this._element = this._getTemplate();
   }
 
   //подготовка данных для карточки из темплейта
@@ -27,16 +27,17 @@ class Card {
   }
 
   generateCard() {
-    this._element.querySelector(".gallery__title").textContent = this._name;
-    this._cardImage = this._element.querySelector(".gallery__image");
+    this.element = this._getTemplate();
+    this.element.querySelector(".gallery__title").textContent = this._name;
+    this._cardImage = this.element.querySelector(".gallery__image");
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
-    this._cardLikesCount = this._element.querySelector(
+    this._cardLikesCount = this.element.querySelector(
       ".gallery__like-counter"
     );
 
-    this._buttonTrash = this._element.querySelector(".gallery__trash");
-    this._buttonLike = this._element.querySelector(".gallery__heart");
+    this._buttonTrash = this.element.querySelector(".gallery__trash");
+    this._buttonLike = this.element.querySelector(".gallery__heart");
 
     this.renderCardsLike(this.cardData);
 
@@ -46,7 +47,7 @@ class Card {
 
     this._setEventListeners();
 
-    return this._element;
+    return this.element;
   }
 
   _likeCard() {
@@ -63,21 +64,21 @@ class Card {
     }
   }
 
-  _deleteCard() {
-    this._element.remove();
-    this._element = null;
+  deleteCard() {
+    this.element.remove();
+    this.element = null;
   }
 
   _setEventListeners() {
     //слушатель на удаление
-    this._buttonTrash.addEventListener("click", () => this._deleteCard());
+    this._buttonTrash.addEventListener("click", () => this._handleCardDelete(this, this.idCard));
 
     //слушатель на лайк
     this._buttonLike.addEventListener("click", () => this._likeCard());
 
     //слушатель на открытие картинки
     this._cardImage.addEventListener("click", () =>
-      this._handleCardClick({
+      this.handleCardClick({
         link: this._link,
         name: this._name,
       })
