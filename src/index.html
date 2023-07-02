@@ -90,9 +90,22 @@
   <div class="popup popup_type_agreement">
     <div class="popup__container">
       <h3 class="popup__title">Вы уверены?</h3>
-      <button type="submit" class="popup__button-agreement">Да</button>
-    <button type="button" class="popup__close-icon"></button>
+      <button type="submit" class="popup__button popup__button-agreement">Да</button>
+    <button type="button" class="popup__close-icon popup__close-icon_type_agreement"></button>
   </div>
+  </div>
+  <div class="popup popup_type_avatar">
+    <div class="popup__container">
+      <form class="form form_type_avatar" name="avatar-form" novalidate>
+        <h3 class="form__title">Обновить аватар</h3>
+        <div class="form__input-container">
+          <input required type="url" class="form__item" id="avatar-input" name="avatar" placeholder="Ссылка на аватар">
+          <span class="error" id="avatar-input-error"></span>
+        </div>
+        <button type="submit" class="form__button">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-icon popup__close-icon_type_avatar"></button>
+    </div>
   </div>
 
   <template id="item">

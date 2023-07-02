@@ -25,11 +25,20 @@ let userCurrentId;
 
 //функция создания карточки через класс:
 const createCard = (data, user) => {
-  const card = new Card(data, user, "#item", () => {
-    popupWithImage.open(data);
-    });
+  const card = new Card({
+    data: data,
+    userId: user,
+    templateSelector: "#item",
 
-  /*  handleCardLike: (cardId) => {
+    handleCardClick: () => {
+      popupWithImage.open(data);
+    },
+
+    handleCardDelete: (cardId, cardElement) => {
+      popupDeleteCard.open(cardId, cardElement);
+    },
+
+      handleCardLike: (cardId) => {
       api
         .putLikeCardServer(cardId)
         .then((res) => {
@@ -44,7 +53,8 @@ const createCard = (data, user) => {
         card.renderCardsLike(res);
       })
       .catch((error) => console.log(`Произошла ошибка ${error}`));
-    }*/
+    }
+  });
 
   return card.generateCard();
 };
@@ -103,14 +113,15 @@ buttonAdd.addEventListener("click", () => {
 // //создание Popup удаления карточки
 const popupDeleteCard = new PopupWithAgreement(".popup_type_agreement", {
   submitCallback: (cardId, card) => {
-    api.deleteCardServer(cardId)
-    .then(() => {
-      card.deleteCard();
-      popupDeleteCard.close();
-    })
-    .catch((error) => console.log(`Произошла ошибка ${error}`));
-    }
-  });
+    api
+      .deleteCardServer(cardId)
+      .then(() => {
+        card.deleteCard();
+        popupDeleteCard.close();
+      })
+      .catch((error) => console.log(`Произошла ошибка ${error}`));
+  },
+});
 
 popupAddCards.setEventListeners();
 popupEditProfile.setEventListeners();
@@ -127,8 +138,6 @@ validationFormAdd.enableValidation();
 Promise.all([api.getUserInfoServer(), api.getInitialCardsServer()])
   .then(([resUser, resCard]) => {
     userCurrentId = resUser._id;
-    console.log("get", resUser);
-    console.log("get", resCard);
     userInfo.setUserInfo(resUser);
     userInfo.setUserAvatar(resUser);
     cardContainer.renderItems(resCard.reverse(), userCurrentId);
