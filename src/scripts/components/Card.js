@@ -4,7 +4,9 @@ class Card {
     userId,
     templateSelector,
     handleCardClick,
-    handleCardDelete, handleCardLike,  handleCardDeleteLike
+    handleCardDelete,
+    handleCardLike,
+    handleCardDeleteLike,
   }) {
     this._name = data.name;
     this._link = data.link;
@@ -14,11 +16,11 @@ class Card {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
-    this._putLike= handleCardLike;
+    this._putLike = handleCardLike;
     this._deleteLike = handleCardDeleteLike;
     this._idCardUser = data.owner._id;
     this._userId = userId;
-  };
+  }
 
   //подготовка данных для карточки из темплейта
   _getTemplate() {
@@ -42,7 +44,6 @@ class Card {
     this._buttonLike = this.element.querySelector(".gallery__heart");
 
     this.renderCardsLike(this.cardData);
-    console.log("id", this._idCardUser, this._userId);
 
     if (this._idCardUser !== this._userId) {
       this._buttonTrash.remove();
@@ -55,14 +56,13 @@ class Card {
 
   // Есть ли лайк на карточке?
   isLikedCard() {
-    return this._likes.some((like) => like._id === this._userId
-    )}
+    return this._likes.some((like) => like._id === this._userId);
+  }
 
   toggleLike() {
     if (this.isLikedCard()) {
       this._deleteLike(this.cardId);
-    } else
-    this._putLike(this.cardId);
+    } else this._putLike(this.cardId);
   }
 
   //отображение кол-ва лайков
