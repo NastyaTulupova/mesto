@@ -5,6 +5,12 @@
   object-fit: cover;
   box-sizing: border-box;
   margin-right: 30px;
+  transition: opacity 0.7s ease-in-out;
+}
+
+.profile__avatar:hover {
+  cursor: pointer;
+  opacity: 0.2;
 }
 
 @media screen and (max-width: 900px) {

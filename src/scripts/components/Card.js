@@ -42,6 +42,7 @@ class Card {
     this._buttonLike = this.element.querySelector(".gallery__heart");
 
     this.renderCardsLike(this.cardData);
+    console.log("id", this._idCardUser, this._userId);
 
     if (this._idCardUser !== this._userId) {
       this._buttonTrash.remove();
@@ -62,13 +63,11 @@ class Card {
       this._deleteLike(this.cardId);
     } else
     this._putLike(this.cardId);
-   // this._buttonLike.classList.toggle("gallery__heart_active");
   }
 
   //отображение кол-ва лайков
   renderCardsLike(card) {
     this._likes = card.likes;
-    console.log("likes:", this._likes);
     if (this._likes.length === 0) {
       this._cardLikesCount.textContent = "0";
     } else {

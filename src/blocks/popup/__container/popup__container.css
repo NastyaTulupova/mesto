@@ -5,7 +5,6 @@
   border-radius: 10px;
   z-index: 3;
   position: relative;
-  justify-content: center;
 }
 
 @media screen and (max-width: 580px) {
