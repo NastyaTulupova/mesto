@@ -15,6 +15,16 @@ class PopupWithAgreement extends Popup {
     this.card = card;
   }
 
+  //Отображение статуса загрузки на кнопке сохранения
+  renderLoading(loading, text) {
+    if (loading) {
+      this.defaultText = this._buttonAgreement.textContent;
+      this._buttonAgreement.textContent = text;
+    } else {
+      this._buttonAgreement.textContent = this.defaultText;
+    }
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._buttonAgreement.addEventListener("click", () => {

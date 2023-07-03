@@ -16,4 +16,23 @@ const configFormSelector = {
   errorClass: "error",
 };
 
-export { configFormSelector, autorisationCredits };
+// кнопки/ нажатия
+const buttonEdit = document.querySelector(".profile__edit-button");
+const buttonAdd = document.querySelector(".profile__add-button");
+const pencilAvatar = document.querySelector(".profile__avatar");
+
+// Находим формы в DOM
+const editForm = document.querySelector(".form_type_edit");
+const addForm = document.querySelector(".form_type_add");
+const avatarForm = document.querySelector(".form_type_avatar");
+
+export {
+  configFormSelector,
+  autorisationCredits,
+  buttonEdit,
+  buttonAdd,
+  pencilAvatar,
+  editForm,
+  addForm,
+  avatarForm,
+};

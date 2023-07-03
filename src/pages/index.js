@@ -1,6 +1,15 @@
 import "./index.css";
 import { Card } from "../scripts/components/Card.js";
-import { configFormSelector, autorisationCredits } from "../scripts/utils/constants.js";
+import {
+  configFormSelector,
+  autorisationCredits,
+  buttonEdit,
+  buttonAdd,
+  pencilAvatar,
+  editForm,
+  addForm,
+  avatarForm,
+} from "../scripts/utils/constants.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
@@ -9,37 +18,27 @@ import { UserInfo } from "../scripts/components/UserInfo.js";
 import { Api } from "../scripts/components/Api.js";
 import { PopupWithAgreement } from "../scripts/components/PopupWithAgreement.js";
 
-// кнопки/ нажатия
-const buttonEdit = document.querySelector(".profile__edit-button");
-const buttonAdd = document.querySelector(".profile__add-button");
-const pencilAvatar = document.querySelector(".profile__avatar");
-
-// Находим формы в DOM
-const editForm = document.querySelector(".form_type_edit");
-const addForm = document.querySelector(".form_type_add");
-const avatarForm = document.querySelector(".form_type_avatar");
-
 //Открытие карточки в режиме просмотра изображения
 const popupWithImage = new PopupWithImage(".popup_type_image");
 
 const api = new Api(autorisationCredits);
-let userCurrentId;
+let userId;
 
 // Ответы от сервера
 Promise.all([api.getUserInfoServer(), api.getInitialCardsServer()])
   .then(([resUser, resCard]) => {
-    userCurrentId = resUser._id;
+    userId = resUser._id;
     userInfo.setUserInfo(resUser);
     userInfo.setUserAvatar(resUser);
-    cardContainer.renderItems(resCard.reverse(), userCurrentId);
+    cardContainer.renderItems(resCard.reverse());
   })
   .catch((error) => console.log(`Произошла ошибка ${error}`));
 
 //функция создания карточки через класс:
-const createCard = (data, user) => {
+const createCard = (item) => {
   const card = new Card({
-    data: data,
-    userId: user,
+    data: item,
+    userId: userId,
     templateSelector: "#item",
 
     handleCardClick: () => {
@@ -54,7 +53,8 @@ const createCard = (data, user) => {
       api
         .putLikeCardServer(cardId)
         .then((res) => {
-          card.renderCardsLike(res);
+          card.updateData(res);
+          card.renderCardsLike();
         })
         .catch((error) => console.log(`Произошла ошибка ${error}`));
     },
@@ -63,7 +63,8 @@ const createCard = (data, user) => {
       api
         .deleteLikeCardServer(cardId)
         .then((res) => {
-          card.renderCardsLike(res);
+          card.updateData(res);
+          card.renderCardsLike();
         })
         .catch((error) => console.log(`Произошла ошибка ${error}`));
     },
@@ -75,8 +76,8 @@ const createCard = (data, user) => {
 //создание карточек из массива (создание секции)
 const cardContainer = new Section(
   {
-    renderer: (item, userId) => {
-      cardContainer.addItem(createCard(item, userId));
+    renderer: (item) => {
+      cardContainer.addItem(createCard(item));
     },
   },
   ".gallery"
@@ -97,7 +98,6 @@ const popupEditProfile = new PopupWithForm(".popup_type_edit", {
       .setUserInfoServer(data)
       .then((res) => {
         userInfo.setUserInfo(res);
-        popupEditProfile.close();
       })
       .catch((error) => console.log(`Произошла ошибка ${error}`))
       .finally(() => {
@@ -119,9 +119,8 @@ const popupAddCards = new PopupWithForm(".popup_type_add", {
     api
       .addNewCardServer(item)
       .then((newCard) => {
-        cardContainer.addItem(createCard(newCard, userCurrentId));
+        cardContainer.addItem(createCard(newCard, userId));
         validationFormAdd.disabledButton();
-        popupAddCards.close();
       })
       .catch((error) => console.log(`Произошла ошибка ${error}`))
       .finally(() => {
@@ -138,13 +137,17 @@ buttonAdd.addEventListener("click", () => {
 // создание Popup удаления карточки
 const popupDeleteCard = new PopupWithAgreement(".popup_type_agreement", {
   submitCallback: (cardId, card) => {
+    popupDeleteCard.renderLoading(true, "Удаление...");
     api
       .deleteCardServer(cardId)
       .then(() => {
         card.deleteCard();
         popupDeleteCard.close();
       })
-      .catch((error) => console.log(`Произошла ошибка ${error}`));
+      .catch((error) => console.log(`Произошла ошибка ${error}`))
+      .finally(() => {
+        popupDeleteCard.renderLoading(false);
+      });
   },
 });
 
@@ -156,7 +159,6 @@ const popupEditAvatar = new PopupWithForm(".popup_type_avatar", {
       .setUserAvatarServer(item)
       .then((resUser) => {
         userInfo.setUserAvatar(resUser);
-        popupEditAvatar.close();
       })
       .catch((error) => console.log(`Произошла ошибка ${error}`))
       .finally(() => {

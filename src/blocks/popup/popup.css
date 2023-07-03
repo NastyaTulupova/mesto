@@ -9,7 +9,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
   display: flex;
-  transition: opacity 0.5s ease-in-out;
   opacity: 0;
   visibility: hidden;
+  transition: visibility 0.8s, opacity 0.8s;
 }

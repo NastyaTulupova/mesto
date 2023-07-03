@@ -65,9 +65,12 @@ class Card {
     } else this._putLike(this.cardId);
   }
 
+  updateData(newData) {
+    this._likes = newData.likes;
+  }
+
   //отображение кол-ва лайков
-  renderCardsLike(card) {
-    this._likes = card.likes;
+  renderCardsLike() {
     if (this._likes.length === 0) {
       this._cardLikesCount.textContent = "0";
     } else {
