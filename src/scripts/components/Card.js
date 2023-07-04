@@ -65,8 +65,8 @@ class Card {
     } else this._putLike(this.cardId);
   }
 
-  updateData(newData) {
-    this._likes = newData.likes;
+  updateData(likes) {
+    this._likes = likes;
   }
 
   //отображение кол-ва лайков

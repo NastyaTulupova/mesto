@@ -53,7 +53,7 @@ const createCard = (item) => {
       api
         .putLikeCardServer(cardId)
         .then((res) => {
-          card.updateData(res);
+          card.updateData(res.likes);
           card.renderCardsLike();
         })
         .catch((error) => console.log(`Произошла ошибка ${error}`));
@@ -63,7 +63,7 @@ const createCard = (item) => {
       api
         .deleteLikeCardServer(cardId)
         .then((res) => {
-          card.updateData(res);
+          card.updateData(res.likes);
           card.renderCardsLike();
         })
         .catch((error) => console.log(`Произошла ошибка ${error}`));
@@ -98,6 +98,7 @@ const popupEditProfile = new PopupWithForm(".popup_type_edit", {
       .setUserInfoServer(data)
       .then((res) => {
         userInfo.setUserInfo(res);
+        popupEditProfile.close();
       })
       .catch((error) => console.log(`Произошла ошибка ${error}`))
       .finally(() => {
@@ -121,6 +122,7 @@ const popupAddCards = new PopupWithForm(".popup_type_add", {
       .then((newCard) => {
         cardContainer.addItem(createCard(newCard, userId));
         validationFormAdd.disabledButton();
+        popupAddCards.close();
       })
       .catch((error) => console.log(`Произошла ошибка ${error}`))
       .finally(() => {
@@ -159,6 +161,7 @@ const popupEditAvatar = new PopupWithForm(".popup_type_avatar", {
       .setUserAvatarServer(item)
       .then((resUser) => {
         userInfo.setUserAvatar(resUser);
+        popupEditAvatar.close();
       })
       .catch((error) => console.log(`Произошла ошибка ${error}`))
       .finally(() => {
